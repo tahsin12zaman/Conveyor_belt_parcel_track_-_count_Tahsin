@@ -3,18 +3,18 @@ import numpy as np
 from ultralytics import YOLO
 from collections import deque
 
-# Load the YOLO model
+# Loading my tarined yolo model
 model_path = 'my_model.pt'
 model = YOLO(model_path)
 
-# Function to perform inference on a frame
+# Function to do inferencing on any frame
 def detect_parcels(frame, model):
     # Perform inference
     results = model(frame)
     detections = results[0].boxes.xyxy  # Extract bounding boxes
     scores = results[0].boxes.conf  # Extract confidence scores
 
-    # Convert detections to list of tuples (x1, y1, x2, y2, score)
+    # Converting detections to list of tuples (x1, y1, x2, y2, score)
     boxes = []
     for i, detection in enumerate(detections):
         x1, y1, x2, y2 = detection
@@ -22,7 +22,7 @@ def detect_parcels(frame, model):
         boxes.append((x1.item(), y1.item(), x2.item(), y2.item(), score.item()))
     return boxes
 
-# Function to calculate the Euclidean distance between two points
+# Function for calculating the Euclidean distance between two points - - so that no parcel is counted twice
 def euclidean_distance(pt1, pt2):
     return np.sqrt((pt1[0] - pt2[0]) ** 2 + (pt1[1] - pt2[1]) ** 2)
 
@@ -38,7 +38,7 @@ def process_frames(video_path, model, max_distance=50):
         if not ret:
             break
 
-        # Detect parcels in the current frame
+        # Detecting parcels in current frame
         detections = detect_parcels(frame, model)
 
         current_centroids = []
@@ -80,7 +80,7 @@ def process_frames(video_path, model, max_distance=50):
     cv2.destroyAllWindows()
     return parcel_count
 
-# Example usage
+# Example video for detection, tracking & counting
 video_path = 'sample_vid.mp4'
 total_parcel_count = process_frames(video_path, model)
 print(f'Total parcels counted: {total_parcel_count}')
