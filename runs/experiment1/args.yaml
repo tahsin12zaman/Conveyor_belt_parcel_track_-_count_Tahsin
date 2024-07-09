@@ -1,7 +1,7 @@
 task: detect
 mode: train
 model: yolov8n.pt
-data: C:/Users/HP/PycharmProjects/conv_belt_parcel/dataset/data.yaml
+data: /home/kow-ai-3/Documents/Office_Work/Dataset/dfew/Conveyor_belt_parcel_track_-_count_Tahsin/dataset/data.yaml
 epochs: 50
 time: null
 patience: 100
@@ -10,9 +10,9 @@ imgsz: 640
 save: true
 save_period: 5
 cache: false
-device: null
+device: cuda:0
 workers: 8
-project: C:/Users/HP/PycharmProjects/conv_belt_parcel/runs
+project: runs
 name: experiment1
 exist_ok: false
 pretrained: true
@@ -103,4 +103,4 @@ erasing: 0.4
 crop_fraction: 1.0
 cfg: null
 tracker: botsort.yaml
-save_dir: C:\Users\HP\PycharmProjects\conv_belt_parcel\runs\experiment1
+save_dir: runs/experiment1

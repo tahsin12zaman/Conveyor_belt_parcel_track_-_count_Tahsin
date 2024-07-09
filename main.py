@@ -4,7 +4,7 @@ from ultralytics import YOLO
 from collections import deque
 
 # Loading my tarined yolo model
-model_path = 'my_model.pt'
+model_path = 'last.pt'
 model = YOLO(model_path)
 
 # Function to do inferencing on any frame
@@ -82,5 +82,6 @@ def process_frames(video_path, model, max_distance=50):
 
 # Example video for detection, tracking & counting
 video_path = 'sample_vid.mp4'
+
 total_parcel_count = process_frames(video_path, model)
 print(f'Total parcels counted: {total_parcel_count}')
